@@ -20,6 +20,13 @@
             --red: #ff0033;
             --terminal-red: #ff0033;
             --light-red: #ff3355;
+            
+            /* Обновленные цвета для светлой темы */
+            --light-bg: #fff9fb; /* Очень светлый розовый фон */
+            --light-text: #4a4a4a; /* Мягкий темно-серый */
+            --light-burgundy: #ff8fa3; /* Нежный розовый */
+            --light-accent: #ffc2d1; /* Очень светлый розовый */
+            --light-sakura: #ffb6c1; /* Пастельный розовый */
         }
 
         * {
@@ -35,6 +42,12 @@
             overflow-x: hidden;
             position: relative;
             min-height: 100vh;
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        body.light-theme {
+            background-color: var(--light-bg);
+            color: var(--light-text);
         }
 
         .background {
@@ -46,6 +59,11 @@
             z-index: -3;
             background: var(--black);
             overflow: hidden;
+            transition: background-color 0.5s;
+        }
+
+        body.light-theme .background {
+            background: var(--light-bg);
         }
 
         .sakura-bg {
@@ -58,6 +76,11 @@
             background-size: cover;
             opacity: 0.2;
             filter: blur(4px);
+            transition: background-image 0.5s;
+        }
+
+        body.light-theme .sakura-bg {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path fill="%23ffc2d1" d="M100,20 C120,40 140,30 160,50 C180,70 170,90 150,110 C130,130 110,120 90,140 C70,160 50,150 30,130 C10,110 20,90 40,70 C60,50 80,60 100,20 Z" opacity="0.3"/></svg>');
         }
 
         .sakura-tree {
@@ -66,11 +89,16 @@
             right: -100px;
             width: 600px;
             height: 600px;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"><path fill="%23330011" d="M250,500 C200,400 150,350 200,250 C150,200 200,150 250,100 C300,150 350,200 300,250 C350,300 300,350 250,500 Z" opacity="0.8"/></svg>');
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"><path fill="%23330011" d="M250,500 C200,400 150,350 200,250 C150,200 200,150 250,100 C300,150 350,200 300,250 C350,300 300,350 250,500 Z" opacity="0.15"/></svg>');
             background-repeat: no-repeat;
             background-position: bottom right;
             z-index: -2;
             opacity: 0.15;
+            transition: background-image 0.5s;
+        }
+
+        body.light-theme .sakura-tree {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"><path fill="%23ff8fa3" d="M250,500 C200,400 150,350 200,250 C150,200 200,150 250,100 C300,150 350,200 300,250 C350,300 300,350 250,500 Z" opacity="0.15"/></svg>');
         }
 
         .petals-container {
@@ -92,6 +120,11 @@
             border-radius: 50% 0 50% 50%;
             opacity: 0;
             animation: falling linear infinite;
+            transition: background-color 0.5s;
+        }
+
+        body.light-theme .petal {
+            background-color: var(--light-sakura);
         }
 
         @keyframes falling {
@@ -126,6 +159,11 @@
             margin-bottom: 3rem;
             border-bottom: 1px solid var(--burgundy);
             padding-bottom: 1rem;
+            transition: border-color 0.5s;
+        }
+
+        body.light-theme header {
+            border-bottom: 1px solid var(--light-burgundy);
         }
 
         .title {
@@ -133,10 +171,21 @@
             font-size: 2rem;
             color: var(--burgundy);
             text-shadow: 0 0 5px rgba(255, 0, 51, 0.3);
+            transition: color 0.5s;
+        }
+
+        body.light-theme .title {
+            color: var(--light-burgundy);
+            text-shadow: 0 0 5px rgba(255, 143, 163, 0.3);
         }
 
         .title span {
             color: white;
+            transition: color 0.5s;
+        }
+
+        body.light-theme .title span {
+            color: var(--light-text);
         }
 
         .kanji {
@@ -146,6 +195,11 @@
             text-orientation: upright;
             color: var(--burgundy);
             margin-left: 1rem;
+            transition: color 0.5s;
+        }
+
+        body.light-theme .kanji {
+            color: var(--light-burgundy);
         }
 
         .typing-container {
@@ -156,12 +210,24 @@
             margin-bottom: 3rem;
             box-shadow: 0 0 20px rgba(128, 0, 32, 0.3);
             min-height: 200px;
+            transition: all 0.5s;
+        }
+
+        body.light-theme .typing-container {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--light-burgundy);
+            box-shadow: 0 0 20px rgba(255, 143, 163, 0.2);
         }
 
         .typing-text {
             font-family: 'JetBrains Mono', monospace;
             line-height: 1.6;
             white-space: pre-wrap;
+            transition: color 0.5s;
+        }
+
+        body.light-theme .typing-text {
+            color: var(--light-text);
         }
 
         .typing-cursor {
@@ -171,6 +237,11 @@
             background-color: var(--terminal-red);
             animation: blink 1s infinite;
             vertical-align: middle;
+            transition: background-color 0.5s;
+        }
+
+        body.light-theme .typing-cursor {
+            background-color: var(--light-burgundy);
         }
 
         @keyframes blink {
@@ -197,9 +268,18 @@
             font-family: 'JetBrains Mono', monospace;
         }
 
+        body.light-theme .typing-btn {
+            background: var(--light-burgundy);
+            color: white;
+        }
+
         .typing-btn:hover {
             background: var(--burgundy);
             transform: translateY(-2px);
+        }
+
+        body.light-theme .typing-btn:hover {
+            background: #ff6b8b;
         }
 
         .typing-btn:active {
@@ -213,6 +293,13 @@
             padding: 1.5rem;
             margin-bottom: 3rem;
             box-shadow: 0 0 15px rgba(128, 0, 32, 0.4);
+            transition: all 0.5s;
+        }
+
+        body.light-theme .search-container {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--light-burgundy);
+            box-shadow: 0 0 15px rgba(255, 143, 163, 0.2);
         }
 
         .search-title {
@@ -222,12 +309,22 @@
             display: flex;
             align-items: center;
             margin-bottom: 1rem;
+            transition: color 0.5s;
+        }
+
+        body.light-theme .search-title {
+            color: var(--light-burgundy);
         }
 
         .search-title::before {
             content: "❯ ";
             color: var(--terminal-red);
             margin-right: 0.5rem;
+            transition: color 0.5s;
+        }
+
+        body.light-theme .search-title::before {
+            color: var(--light-burgundy);
         }
 
         .search-box {
@@ -246,11 +343,23 @@
             font-family: 'JetBrains Mono', monospace;
             font-size: 1rem;
             outline: none;
+            transition: all 0.5s;
+        }
+
+        body.light-theme .search-input {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid var(--light-burgundy);
+            color: var(--light-text);
         }
 
         .search-input:focus {
             border-color: var(--light-red);
             box-shadow: 0 0 8px rgba(255, 0, 51, 0.4);
+        }
+
+        body.light-theme .search-input:focus {
+            border-color: #ff6b8b;
+            box-shadow: 0 0 8px rgba(255, 143, 163, 0.3);
         }
 
         .search-btn {
@@ -264,9 +373,19 @@
             font-family: 'JetBrains Mono', monospace;
         }
 
+        body.light-theme .search-btn {
+            background: var(--light-burgundy);
+            border: 1px solid var(--light-burgundy);
+            color: white;
+        }
+
         .search-btn:hover {
             background: var(--burgundy);
             transform: translateY(-2px);
+        }
+
+        body.light-theme .search-btn:hover {
+            background: #ff6b8b;
         }
 
         .search-btn:active {
@@ -280,11 +399,22 @@
             padding: 1.5rem;
             margin-top: 1rem;
             min-height: 100px;
+            transition: all 0.5s;
+        }
+
+        body.light-theme .search-results {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid var(--light-burgundy);
         }
 
         .result-item {
             padding: 0.8rem 0;
             border-bottom: 1px solid rgba(128, 0, 32, 0.3);
+            transition: border-color 0.5s;
+        }
+
+        body.light-theme .result-item {
+            border-bottom: 1px solid rgba(255, 143, 163, 0.3);
         }
 
         .result-item:last-child {
@@ -295,12 +425,22 @@
             color: var(--light-red);
             margin-bottom: 0.3rem;
             font-weight: bold;
+            transition: color 0.5s;
+        }
+
+        body.light-theme .result-title {
+            color: #ff6b8b;
         }
 
         .result-link {
             color: #aaa;
             font-size: 0.9rem;
             word-break: break-all;
+            transition: color 0.5s;
+        }
+
+        body.light-theme .result-link {
+            color: #666;
         }
 
         .back-btn {
@@ -315,8 +455,17 @@
             transition: all 0.3s;
         }
 
+        body.light-theme .back-btn {
+            background: var(--light-burgundy);
+            color: white;
+        }
+
         .back-btn:hover {
             background: var(--burgundy);
+        }
+
+        body.light-theme .back-btn:hover {
+            background: #ff6b8b;
         }
 
         .hidden {
@@ -330,6 +479,11 @@
             margin: 2rem 0 1rem;
             display: flex;
             align-items: center;
+            transition: color 0.5s;
+        }
+
+        body.light-theme .section-title {
+            color: var(--light-burgundy);
         }
 
         .section-title::after {
@@ -338,6 +492,11 @@
             height: 1px;
             background: var(--burgundy);
             margin-left: 1rem;
+            transition: background-color 0.5s;
+        }
+
+        body.light-theme .section-title::after {
+            background: var(--light-burgundy);
         }
 
         .projects {
@@ -352,12 +511,21 @@
             border: 1px solid var(--burgundy);
             border-radius: 5px;
             padding: 1.5rem;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s;
+        }
+
+        body.light-theme .project-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--light-burgundy);
         }
 
         .project-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 5px 15px rgba(128, 0, 32, 0.4);
+        }
+
+        body.light-theme .project-card:hover {
+            box-shadow: 0 5px 15px rgba(255, 143, 163, 0.2);
         }
 
         .project-title {
@@ -366,17 +534,33 @@
             margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
+            transition: color 0.5s;
+        }
+
+        body.light-theme .project-title {
+            color: var(--light-text);
         }
 
         .project-title::before {
             content: "❯ ";
             color: var(--terminal-red);
+            margin-right: 0.5rem;
+            transition: color 0.5s;
+        }
+
+        body.light-theme .project-title::before {
+            color: var(--light-burgundy);
         }
 
         .project-desc {
             color: #aaa;
             font-size: 0.9rem;
             margin-bottom: 1rem;
+            transition: color 0.5s;
+        }
+
+        body.light-theme .project-desc {
+            color: #666;
         }
 
         .project-tags {
@@ -391,6 +575,12 @@
             padding: 0.3rem 0.6rem;
             border-radius: 3px;
             font-size: 0.7rem;
+            transition: all 0.5s;
+        }
+
+        body.light-theme .tag {
+            background: var(--light-burgundy);
+            color: white;
         }
 
         .blood-link {
@@ -400,8 +590,16 @@
             transition: color 0.3s;
         }
 
+        body.light-theme .blood-link {
+            color: var(--light-text);
+        }
+
         .blood-link:hover {
             color: var(--red);
+        }
+
+        body.light-theme .blood-link:hover {
+            color: #ff6b8b;
         }
 
         .blood-link::after {
@@ -415,6 +613,10 @@
             transform: scaleX(0);
             transform-origin: right;
             transition: transform 0.3s;
+        }
+
+        body.light-theme .blood-link::after {
+            background: #ff6b8b;
         }
 
         .blood-link:hover::after {
@@ -431,6 +633,11 @@
             opacity: 0;
             pointer-events: none;
             z-index: 100;
+            transition: background-color 0.5s;
+        }
+
+        body.light-theme .blood-drop {
+            background: #ff6b8b;
         }
 
         footer {
@@ -438,6 +645,12 @@
             border-top: 1px solid var(--burgundy);
             padding: 2rem 0;
             margin-top: 3rem;
+            transition: all 0.5s;
+        }
+
+        body.light-theme footer {
+            background: rgba(255, 255, 255, 0.9);
+            border-top: 1px solid var(--light-burgundy);
         }
 
         .footer-content {
@@ -447,6 +660,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+
+        .footer-content div {
+            transition: color 0.5s;
+        }
+
+        body.light-theme .footer-content div {
+            color: var(--light-text);
         }
 
         .social-links {
@@ -466,15 +687,29 @@
             transition: all 0.3s;
         }
 
+        body.light-theme .social-icon {
+            background: white;
+            border: 2px solid var(--light-burgundy);
+        }
+
         .social-icon:hover {
             background: var(--burgundy);
             transform: scale(1.1);
+        }
+
+        body.light-theme .social-icon:hover {
+            background: var(--light-burgundy);
         }
 
         .social-icon svg {
             width: 20px;
             height: 20px;
             fill: white;
+            transition: fill 0.5s;
+        }
+
+        body.light-theme .social-icon svg {
+            fill: var(--light-text);
         }
 
         .copy-notification {
@@ -493,6 +728,12 @@
             z-index: 1000;
         }
 
+        body.light-theme .copy-notification {
+            background: white;
+            border: 1px solid var(--light-burgundy);
+            color: var(--light-text);
+        }
+
         .copy-notification.show {
             transform: translateY(0);
             opacity: 1;
@@ -503,6 +744,11 @@
             font-family: 'Noto Sans JP', sans-serif;
             margin-right: 0.5rem;
             color: var(--red);
+            transition: color 0.5s;
+        }
+
+        body.light-theme .copy-notification::before {
+            color: var(--light-burgundy);
         }
 
         .mobile-pattern {
@@ -516,6 +762,41 @@
             background-size: 20px 20px;
             opacity: 0.1;
             z-index: -1;
+            transition: background-image 0.5s;
+        }
+
+        body.light-theme .mobile-pattern {
+            background-image: radial-gradient(var(--light-sakura) 1px, transparent 1px);
+        }
+
+        /* Кнопка переключения темы */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--dark-burgundy);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            z-index: 100;
+            transition: all 0.5s;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+
+        body.light-theme .theme-toggle {
+            background: var(--light-burgundy);
+            color: white;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
         }
 
         @media (max-width: 768px) {
@@ -542,6 +823,13 @@
             .typing-buttons {
                 flex-direction: column;
             }
+            .theme-toggle {
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
@@ -553,8 +841,11 @@
         <div class="mobile-pattern"></div>
     </div>
 
-    <!-- Petals container - now between background and content -->
+    <!-- Petals container -->
     <div class="petals-container" id="petals-container"></div>
+
+    <!-- Theme toggle button -->
+    <button id="theme-toggle" class="theme-toggle">月</button>
 
     <!-- Main content -->
     <div class="container">
@@ -563,7 +854,6 @@
             <div class="kanji">影 桜</div>
         </header>
 
-        <!-- Поисковая строка всегда видна -->
         <div class="search-container">
             <div class="search-title">Global Search</div>
             <div class="search-box">
@@ -571,16 +861,12 @@
                 <button id="search-btn" class="search-btn">Search</button>
             </div>
             
-            <!-- Область результатов поиска (изначально скрыта) -->
             <div id="search-results" class="search-results hidden">
-                <!-- Результаты будут отображаться здесь -->
             </div>
             
-            <!-- Кнопка возврата (изначально скрыта) -->
             <button id="back-btn" class="back-btn hidden">Back to Search</button>
         </div>
 
-        <!-- Весь остальной контент страницы -->
         <div id="main-content">
             <div class="typing-container">
                 <div class="typing-text" id="typing-text"></div>
@@ -659,7 +945,6 @@
     <div class="copy-notification" id="copy-notification">連絡ありがとう</div>
 
     <script>
-        // Функция для экранирования HTML
         function escapeHtml(unsafe) {
             if (!unsafe) return '';
             return unsafe.toString()
@@ -670,10 +955,10 @@
                 .replace(/'/g, "&#039;");
         }
 
-        // Создание лепестков
         function createPetals() {
             const container = document.getElementById('petals-container');
             const petalCount = window.innerWidth < 768 ? 0 : 15;
+            const isLightTheme = document.body.classList.contains('light-theme');
             
             container.innerHTML = '';
             
@@ -694,14 +979,19 @@
                 petal.style.animationDuration = `${duration}s`;
                 petal.style.opacity = opacity;
                 
-                const hue = Math.random() * 10 + 340;
-                petal.style.backgroundColor = `hsla(${hue}, 80%, 60%, ${opacity})`;
+                if (isLightTheme) {
+                    // Нежно-розовые лепестки для светлой темы
+                    petal.style.backgroundColor = `hsla(340, 100%, 85%, ${opacity})`;
+                } else {
+                    // Бордовые лепестки для темной темы
+                    const hue = Math.random() * 10 + 340;
+                    petal.style.backgroundColor = `hsla(${hue}, 80%, 60%, ${opacity})`;
+                }
                 
                 container.appendChild(petal);
             }
         }
         
-        // Эффект печатающего текста
         async function typeWriter(textElement, text, speed = 30) {
             textElement.innerHTML = '';
             for (let i = 0; i < text.length; i++) {
@@ -713,16 +1003,13 @@
             textElement.appendChild(cursor);
         }
         
-        // Контент для анимации
         const content = {
             whoami: `# About skorpi\n\nRed Team Operator | Penetration Tester | Security Researcher\n\nSpecializing in offensive security, vulnerability research, and custom tool development.\nBlending technical expertise with creative problem-solving to identify and exploit vulnerabilities.`,
             skills: `# Core Skills\n\n❯ Penetration Testing\n❯ Exploit Development\n❯ Custom Tool Development\n❯ Network Security\n❯ Reverse Engineering\n❯ Social Engineering\n❯ Threat Emulation\n❯ Vulnerability Research`,
             contact: `# Contact Information\n\nEmail: skorpi@protonmail.com\nTelegram: @skorpi\nGitHub: github.com/skorpi\n\nClick the email icon below to copy my email address.`
         };
         
-        // Поисковая функция
         function performSearch(query) {
-            // Очищаем запрос
             const cleanQuery = escapeHtml(query.trim());
             
             const resultsContainer = document.getElementById('search-results');
@@ -737,14 +1024,10 @@
                 return;
             }
             
-            // Скрываем основной контент
             mainContent.classList.add('hidden');
-            
-            // Показываем результаты
             resultsContainer.classList.remove('hidden');
             backBtn.classList.remove('hidden');
             
-            // Безопасный вывод результатов
             resultsContainer.innerHTML = `
                 <div class="result-item">
                     <div class="result-title">${escapeHtml(cleanQuery)} in Exploit Database</div>
@@ -777,7 +1060,6 @@
             `;
         }
         
-        // Возврат к основному контенту
         function backToMain() {
             const resultsContainer = document.getElementById('search-results');
             const mainContent = document.getElementById('main-content');
@@ -790,9 +1072,24 @@
             mainContent.classList.remove('hidden');
         }
         
-        // Инициализация при загрузке
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            const isLight = document.body.classList.contains('light-theme');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            createPetals();
+            
+            const themeBtn = document.getElementById('theme-toggle');
+            themeBtn.textContent = isLight ? '影' : '月';
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             createPetals();
+            
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+                document.getElementById('theme-toggle').textContent = '影';
+            }
             
             const typingText = document.getElementById('typing-text');
             const whoamiBtn = document.getElementById('whoami-btn');
@@ -803,25 +1100,23 @@
             const searchBtn = document.getElementById('search-btn');
             const searchInput = document.getElementById('search-input');
             const backBtn = document.getElementById('back-btn');
+            const themeToggle = document.getElementById('theme-toggle');
             
-            // Начальный текст
             typeWriter(typingText, content.whoami);
             
-            // Обработчики кнопок
             whoamiBtn.addEventListener('click', () => typeWriter(typingText, content.whoami));
             skillsBtn.addEventListener('click', () => typeWriter(typingText, content.skills));
             contactBtn.addEventListener('click', () => typeWriter(typingText, content.contact));
             
-            // Поиск
             searchBtn.addEventListener('click', () => performSearch(searchInput.value));
             searchInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') performSearch(searchInput.value);
             });
             
-            // Возврат
             backBtn.addEventListener('click', backToMain);
             
-            // Эффект капель крови
+            themeToggle.addEventListener('click', toggleTheme);
+            
             document.querySelectorAll('.blood-link, .social-icon').forEach(link => {
                 link.addEventListener('mouseenter', function() {
                     for (let i = 0; i < 3; i++) {
@@ -848,7 +1143,6 @@
                 });
             });
             
-            // Копирование email
             emailBtn.addEventListener('click', function(e) {
                 e.preventDefault();
                 navigator.clipboard.writeText('skorpi@protonmail.com').then(() => {
@@ -865,7 +1159,6 @@
                 });
             });
             
-            // Ресайз окна
             window.addEventListener('resize', createPetals);
         });
     </script>
