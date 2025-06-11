@@ -13,7 +13,6 @@
       gtag('config', 'G-YKNJ4S4PJ5');
     </script>
     <style>
-        /* Все существующие стили остаются без изменений */
         :root {
             --burgundy: #800020;
             --dark-burgundy: #500010;
@@ -38,7 +37,6 @@
             min-height: 100vh;
         }
 
-        /* Background layers */
         .background {
             position: fixed;
             top: 0;
@@ -185,6 +183,7 @@
             display: flex;
             gap: 1rem;
             margin-top: 1rem;
+            flex-wrap: wrap;
         }
 
         .typing-btn {
@@ -207,17 +206,13 @@
             transform: translateY(0);
         }
 
-        /* Новые стили для поисковой строки */
         .search-container {
-            background: rgba(10, 10, 10, 0.8);
+            background: rgba(10, 10, 10, 0.9);
             border: 1px solid var(--burgundy);
             border-radius: 5px;
             padding: 1.5rem;
             margin-bottom: 3rem;
-            box-shadow: 0 0 15px rgba(128, 0, 32, 0.3);
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+            box-shadow: 0 0 15px rgba(128, 0, 32, 0.4);
         }
 
         .search-title {
@@ -226,6 +221,7 @@
             color: var(--burgundy);
             display: flex;
             align-items: center;
+            margin-bottom: 1rem;
         }
 
         .search-title::before {
@@ -237,6 +233,7 @@
         .search-box {
             display: flex;
             gap: 0.5rem;
+            margin-bottom: 1rem;
         }
 
         .search-input {
@@ -274,6 +271,56 @@
 
         .search-btn:active {
             transform: translateY(0);
+        }
+
+        .search-results {
+            background: rgba(20, 20, 20, 0.7);
+            border: 1px solid var(--burgundy);
+            border-radius: 5px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            min-height: 100px;
+        }
+
+        .result-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(128, 0, 32, 0.3);
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-title {
+            color: var(--light-red);
+            margin-bottom: 0.3rem;
+            font-weight: bold;
+        }
+
+        .result-link {
+            color: #aaa;
+            font-size: 0.9rem;
+            word-break: break-all;
+        }
+
+        .back-btn {
+            background: var(--dark-burgundy);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background: var(--burgundy);
+        }
+
+        .hidden {
+            display: none;
         }
 
         .section-title {
@@ -492,6 +539,9 @@
             .search-box {
                 flex-direction: column;
             }
+            .typing-buttons {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -509,110 +559,128 @@
     <!-- Main content -->
     <div class="container">
         <header>
-            <h1 class="title">skorpi<span> </span> </h1>
+            <h1 class="title">skorpi<span> </span></h1>
             <div class="kanji">影 桜</div>
-	    <img src="https://animated-gif.su/_ph/5/2/197099195.gif">
         </header>
 
-        <div class="typing-container">
-            <div class="typing-text" id="typing-text"></div>
-            <div class="typing-buttons">
-                <button class="typing-btn" id="whoami-btn">whoami</button>
-                <button class="typing-btn" id="skills-btn">skills</button>
-                <button class="typing-btn" id="contact-btn">contact</button>
-                <a href="certificates.html" class="typing-btn">certificates</a>
-            </div>
-        </div>
-
-        <!-- Добавленная поисковая строка -->
+        <!-- Поисковая строка всегда видна -->
         <div class="search-container">
             <div class="search-title">Global Search</div>
             <div class="search-box">
-                <input type="text" id="search-input" class="search-input" placeholder="Enter your search query...">
+                <input type="text" id="search-input" class="search-input" placeholder="Enter your search query..." autofocus>
                 <button id="search-btn" class="search-btn">Search</button>
             </div>
-            <div id="search-results" class="typing-text" style="margin-top: 1rem; min-height: 50px;"></div>
+            
+            <!-- Область результатов поиска (изначально скрыта) -->
+            <div id="search-results" class="search-results hidden">
+                <!-- Результаты будут отображаться здесь -->
+            </div>
+            
+            <!-- Кнопка возврата (изначально скрыта) -->
+            <button id="back-btn" class="back-btn hidden">Back to Search</button>
         </div>
 
-        <h2 class="section-title">KAKASHKE</h2>
-        <div class="projects">
-            <div class="project-card">
-                <h3 class="project-title">Sakura Exploit Framework</h3>
-                <p class="project-desc">Modular post-exploitation framework with C2 capabilities designed for red team engagements.</p>
-                <div class="project-tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">C2</span>
-                    <span class="tag">Red Team</span>
+        <!-- Весь остальной контент страницы -->
+        <div id="main-content">
+            <div class="typing-container">
+                <div class="typing-text" id="typing-text"></div>
+                <div class="typing-buttons">
+                    <button class="typing-btn" id="whoami-btn">whoami</button>
+                    <button class="typing-btn" id="skills-btn">skills</button>
+                    <button class="typing-btn" id="contact-btn">contact</button>
+                    <a href="certificates.html" class="typing-btn">certificates</a>
                 </div>
             </div>
-            <div class="project-card">
-                <h3 class="project-title">Kage Vulnerability Scanner</h3>
-                <p class="project-desc">Stealth vulnerability scanner that mimics legitimate traffic patterns to avoid detection.</p>
-                <div class="project-tags">
-                    <span class="tag">Go</span>
-                    <span class="tag">Network</span>
-                    <span class="tag">Evasion</span>
+
+            <h2 class="section-title">KAKASHKE</h2>
+            <div class="projects">
+                <div class="project-card">
+                    <h3 class="project-title">Sakura Exploit Framework</h3>
+                    <p class="project-desc">Modular post-exploitation framework with C2 capabilities designed for red team engagements.</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">C2</span>
+                        <span class="tag">Red Team</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3 class="project-title">Kage Vulnerability Scanner</h3>
+                    <p class="project-desc">Stealth vulnerability scanner that mimics legitimate traffic patterns to avoid detection.</p>
+                    <div class="project-tags">
+                        <span class="tag">Go</span>
+                        <span class="tag">Network</span>
+                        <span class="tag">Evasion</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3 class="project-title">Ronin Privilege Escalation Toolkit</h3>
+                    <p class="project-desc">Collection of custom privilege escalation techniques for Windows/Linux environments.</p>
+                    <div class="project-tags">
+                        <span class="tag">C++</span>
+                        <span class="tag">PrivEsc</span>
+                        <span class="tag">Kernel</span>
+                    </div>
                 </div>
             </div>
-            <div class="project-card">
-                <h3 class="project-title">Ronin Privilege Escalation Toolkit</h3>
-                <p class="project-desc">Collection of custom privilege escalation techniques for Windows/Linux environments.</p>
-                <div class="project-tags">
-                    <span class="tag">C++</span>
-                    <span class="tag">PrivEsc</span>
-                    <span class="tag">Kernel</span>
-                </div>
+
+            <h2 class="section-title">Skills</h2>
+            <div class="skills">
+                <ul style="list-style-type: none; columns: 2;">
+                    <li>❯ Penetration Testing</li>
+                    <li>❯ Exploit Development</li>
+                    <li>❯ Custom Tool Development</li>
+                    <li>❯ Network Security</li>
+                    <li>❯ Reverse Engineering</li>
+                    <li>❯ Social Engineering</li>
+                    <li>❯ Threat Emulation</li>
+                    <li>❯ Vulnerability Research</li>
+                </ul>
             </div>
         </div>
 
-        <h2 class="section-title">Skills</h2>
-        <div class="skills">
-            <ul style="list-style-type: none; columns: 2;">
-                <li>❯ Penetration Testing</li>
-                <li>❯ Exploit Development</li>
-                <li>❯ Custom Tool Development</li>
-                <li>❯ Network Security</li>
-                <li>❯ Reverse Engineering</li>
-                <li>❯ Social Engineering</li>
-                <li>❯ Threat Emulation</li>
-                <li>❯ Vulnerability Research</li>
-            </ul>
-        </div>
+        <footer>
+            <div class="footer-content">
+                <div>© 2025 skorpi | マキシムは愚か者だ</div>
+                <div class="social-links">
+                    <a href="https://github.com/skorpiq" class="social-icon" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    </a>
+                    <a href="https://t.me/durov" class="social-icon" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/></svg>
+                    </a>
+                    <a href="#" id="email-btn" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12.713l-11.985-9.713h23.97l-11.985 9.713zm0 2.574l-12-9.725v15.438h24v-15.438l-12 9.725z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </footer>
     </div>
-
-    <footer>
-        <div class="footer-content">
-            <div>© 2025 skorpi | マキシムは愚か者だ</div>
-            <div class="social-links">
-                <a href="https://github.com/skorpiq" class="social-icon" target="_blank">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                </a>
-                <a href="https://t.me/zxc" class="social-icon" target="_blank">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/></svg>
-                </a>
-                <a href="#" id="email-btn" class="social-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12.713l-11.985-9.713h23.97l-11.985 9.713zm0 2.574l-12-9.725v15.438h24v-15.438l-12 9.725z"/></svg>
-                </a>
-            </div>
-        </div>
-    </footer>
 
     <div class="copy-notification" id="copy-notification">連絡ありがとう</div>
 
     <script>
-        // Create sakura petals in the dedicated container
+        // Функция для экранирования HTML
+        function escapeHtml(unsafe) {
+            if (!unsafe) return '';
+            return unsafe.toString()
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        // Создание лепестков
         function createPetals() {
             const container = document.getElementById('petals-container');
             const petalCount = window.innerWidth < 768 ? 0 : 15;
             
-            // Clear existing petals
             container.innerHTML = '';
             
             for (let i = 0; i < petalCount; i++) {
                 const petal = document.createElement('div');
                 petal.classList.add('petal');
                 
-                // Random properties
                 const size = Math.random() * 12 + 8;
                 const left = Math.random() * 100;
                 const delay = Math.random() * 10;
@@ -626,7 +694,6 @@
                 petal.style.animationDuration = `${duration}s`;
                 petal.style.opacity = opacity;
                 
-                // Random color variation
                 const hue = Math.random() * 10 + 340;
                 petal.style.backgroundColor = `hsla(${hue}, 80%, 60%, ${opacity})`;
                 
@@ -634,53 +701,96 @@
             }
         }
         
-        // Typewriter effect
+        // Эффект печатающего текста
         async function typeWriter(textElement, text, speed = 30) {
             textElement.innerHTML = '';
             for (let i = 0; i < text.length; i++) {
                 textElement.innerHTML += text.charAt(i);
                 await new Promise(resolve => setTimeout(resolve, speed));
             }
-            // Add blinking cursor at the end
             const cursor = document.createElement('span');
             cursor.classList.add('typing-cursor');
             textElement.appendChild(cursor);
         }
         
-        // Content for typing animation
+        // Контент для анимации
         const content = {
             whoami: `# About skorpi\n\nRed Team Operator | Penetration Tester | Security Researcher\n\nSpecializing in offensive security, vulnerability research, and custom tool development.\nBlending technical expertise with creative problem-solving to identify and exploit vulnerabilities.`,
             skills: `# Core Skills\n\n❯ Penetration Testing\n❯ Exploit Development\n❯ Custom Tool Development\n❯ Network Security\n❯ Reverse Engineering\n❯ Social Engineering\n❯ Threat Emulation\n❯ Vulnerability Research`,
             contact: `# Contact Information\n\nEmail: skorpi@protonmail.com\nTelegram: @skorpi\nGitHub: github.com/skorpi\n\nClick the email icon below to copy my email address.`
         };
         
-        // Search functionality
+        // Поисковая функция
         function performSearch(query) {
-            const resultsContainer = document.getElementById('search-results');
+            // Очищаем запрос
+            const cleanQuery = escapeHtml(query.trim());
             
-            if (!query) {
-                resultsContainer.innerHTML = '<span class="prompt">Please enter a search query</span>';
+            const resultsContainer = document.getElementById('search-results');
+            const mainContent = document.getElementById('main-content');
+            const backBtn = document.getElementById('back-btn');
+            
+            if (!cleanQuery) {
+                resultsContainer.innerHTML = '<div class="result-item">Please enter a search query</div>';
+                resultsContainer.classList.remove('hidden');
+                backBtn.classList.remove('hidden');
+                mainContent.classList.add('hidden');
                 return;
             }
             
-            // Simulating search with static results
-            resultsContainer.innerHTML = '<span class="prompt">Searching for:</span> ' + query;
+            // Скрываем основной контент
+            mainContent.classList.add('hidden');
             
-            // Simulating search delay
-            setTimeout(() => {
-                const searchResults = [
-                    `1. <a href="#" class="blood-link">${query} in Exploit Database</a> - Relevant CVE found`,
-                    `2. <a href="#" class="blood-link">${query} Vulnerability Research</a> - Recent studies`,
-                    `3. <a href="#" class="blood-link">${query} Penetration Testing Guide</a> - Comprehensive tutorial`,
-                    `4. <a href="#" class="blood-link">${query} Red Team Techniques</a> - Advanced methodologies`,
-                    `5. <a href="https://www.google.com/search?q=${encodeURIComponent(query)}" target="_blank" class="blood-link">View all results on Google</a>`
-                ];
-                
-                resultsContainer.innerHTML = '<span class="prompt">Search results:</span>\n' + 
-                    searchResults.map(result => `<div>${result}</div>`).join('');
-            }, 1000);
+            // Показываем результаты
+            resultsContainer.classList.remove('hidden');
+            backBtn.classList.remove('hidden');
+            
+            // Безопасный вывод результатов
+            resultsContainer.innerHTML = `
+                <div class="result-item">
+                    <div class="result-title">${escapeHtml(cleanQuery)} in Exploit Database</div>
+                    <div class="result-link">
+                        <a href="https://www.exploit-db.com/search?q=${encodeURIComponent(cleanQuery)}" target="_blank" class="blood-link">https://www.exploit-db.com/search?q=${escapeHtml(cleanQuery)}</a>
+                    </div>
+                    <div>Found 24 exploits related to ${escapeHtml(cleanQuery)}</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-title">${escapeHtml(cleanQuery)} Vulnerability Research</div>
+                    <div class="result-link">
+                        <a href="https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=${encodeURIComponent(cleanQuery)}" target="_blank" class="blood-link">https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=${escapeHtml(cleanQuery)}</a>
+                    </div>
+                    <div>Recent CVE entries related to ${escapeHtml(cleanQuery)} vulnerabilities</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-title">${escapeHtml(cleanQuery)} Penetration Testing Guide</div>
+                    <div class="result-link">
+                        <a href="https://owasp.org/www-project-web-security-testing-guide/latest/" target="_blank" class="blood-link">https://owasp.org/www-project-web-security-testing-guide/latest/</a>
+                    </div>
+                    <div>Comprehensive penetration testing methodology</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-title">Google Search: ${escapeHtml(cleanQuery)}</div>
+                    <div class="result-link">
+                        <a href="https://www.google.com/search?q=${encodeURIComponent(cleanQuery)}" target="_blank" class="blood-link">https://www.google.com/search?q=${escapeHtml(cleanQuery)}</a>
+                    </div>
+                    <div>View all results on Google</div>
+                </div>
+            `;
         }
         
+        // Возврат к основному контенту
+        function backToMain() {
+            const resultsContainer = document.getElementById('search-results');
+            const mainContent = document.getElementById('main-content');
+            const backBtn = document.getElementById('back-btn');
+            const searchInput = document.getElementById('search-input');
+            
+            searchInput.value = '';
+            resultsContainer.classList.add('hidden');
+            backBtn.classList.add('hidden');
+            mainContent.classList.remove('hidden');
+        }
+        
+        // Инициализация при загрузке
         document.addEventListener('DOMContentLoaded', function() {
             createPetals();
             
@@ -692,29 +802,28 @@
             const copyNotification = document.getElementById('copy-notification');
             const searchBtn = document.getElementById('search-btn');
             const searchInput = document.getElementById('search-input');
+            const backBtn = document.getElementById('back-btn');
             
-            // Initial text
+            // Начальный текст
             typeWriter(typingText, content.whoami);
             
-            // Button click handlers
+            // Обработчики кнопок
             whoamiBtn.addEventListener('click', () => typeWriter(typingText, content.whoami));
             skillsBtn.addEventListener('click', () => typeWriter(typingText, content.skills));
             contactBtn.addEventListener('click', () => typeWriter(typingText, content.contact));
             
-            // Search functionality
-            searchBtn.addEventListener('click', () => {
-                performSearch(searchInput.value);
-            });
-            
+            // Поиск
+            searchBtn.addEventListener('click', () => performSearch(searchInput.value));
             searchInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    performSearch(searchInput.value);
-                }
+                if (e.key === 'Enter') performSearch(searchInput.value);
             });
             
-            // Blood drop effect on links
+            // Возврат
+            backBtn.addEventListener('click', backToMain);
+            
+            // Эффект капель крови
             document.querySelectorAll('.blood-link, .social-icon').forEach(link => {
-                link.addEventListener('mouseenter', function(e) {
+                link.addEventListener('mouseenter', function() {
                     for (let i = 0; i < 3; i++) {
                         const drop = document.createElement('div');
                         drop.classList.add('blood-drop');
@@ -729,28 +838,22 @@
                         
                         document.body.appendChild(drop);
                         
-                        // Animate
                         setTimeout(() => {
                             drop.style.opacity = '0.7';
                             drop.style.transform = `translateY(${Math.random() * 20 + 10}px) scale(0.1)`;
                             
-                            // Remove after animation
-                            setTimeout(() => {
-                                drop.remove();
-                            }, 2000);
+                            setTimeout(() => drop.remove(), 2000);
                         }, 10);
                     }
                 });
             });
             
-            // Copy email notification
+            // Копирование email
             emailBtn.addEventListener('click', function(e) {
                 e.preventDefault();
                 navigator.clipboard.writeText('skorpi@protonmail.com').then(() => {
                     copyNotification.classList.add('show');
-                    setTimeout(() => {
-                        copyNotification.classList.remove('show');
-                    }, 3000);
+                    setTimeout(() => copyNotification.classList.remove('show'), 3000);
                 }).catch(err => {
                     console.error('Failed to copy text: ', err);
                     copyNotification.textContent = "Copy failed";
@@ -762,10 +865,8 @@
                 });
             });
             
-            // Handle window resize
-            window.addEventListener('resize', function() {
-                createPetals();
-            });
+            // Ресайз окна
+            window.addEventListener('resize', createPetals);
         });
     </script>
 </body>
