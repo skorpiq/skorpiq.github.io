@@ -6,14 +6,14 @@
     <title>skorpi</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YKNJ4S4PJ5"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-YKNJ4S4PJ5');
-</script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YKNJ4S4PJ5');
+    </script>
     <style>
+        /* Все существующие стили остаются без изменений */
         :root {
             --burgundy: #800020;
             --dark-burgundy: #500010;
@@ -45,7 +45,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -3; /* Самый нижний слой */
+            z-index: -3;
             background: var(--black);
             overflow: hidden;
         }
@@ -71,18 +71,17 @@
             background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"><path fill="%23330011" d="M250,500 C200,400 150,350 200,250 C150,200 200,150 250,100 C300,150 350,200 300,250 C350,300 300,350 250,500 Z" opacity="0.8"/></svg>');
             background-repeat: no-repeat;
             background-position: bottom right;
-            z-index: -2; /* Между фоном и лепестками */
+            z-index: -2;
             opacity: 0.15;
         }
 
-        /* Petals container - now between background and content */
         .petals-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Между фоном и контентом */
+            z-index: -1;
             pointer-events: none;
             overflow: hidden;
         }
@@ -114,16 +113,14 @@
             }
         }
 
-        /* Content layer */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
             position: relative;
-            z-index: 1; /* Основной контент поверх всего */
+            z-index: 1;
         }
 
-        /* Остальные стили остаются без изменений */
         header {
             display: flex;
             justify-content: space-between;
@@ -153,7 +150,6 @@
             margin-left: 1rem;
         }
 
-        /* Interactive typing animation */
         .typing-container {
             background: rgba(10, 10, 10, 0.8);
             border: 1px solid var(--burgundy);
@@ -208,6 +204,75 @@
         }
 
         .typing-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Новые стили для поисковой строки */
+        .search-container {
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid var(--burgundy);
+            border-radius: 5px;
+            padding: 1.5rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 0 15px rgba(128, 0, 32, 0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .search-title {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 1.3rem;
+            color: var(--burgundy);
+            display: flex;
+            align-items: center;
+        }
+
+        .search-title::before {
+            content: "❯ ";
+            color: var(--terminal-red);
+            margin-right: 0.5rem;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .search-input {
+            flex: 1;
+            background: rgba(20, 20, 20, 0.7);
+            border: 1px solid var(--burgundy);
+            border-radius: 3px;
+            padding: 0.7rem 1rem;
+            color: white;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: var(--light-red);
+            box-shadow: 0 0 8px rgba(255, 0, 51, 0.4);
+        }
+
+        .search-btn {
+            background: var(--dark-burgundy);
+            color: white;
+            border: 1px solid var(--burgundy);
+            border-radius: 3px;
+            padding: 0.7rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .search-btn:hover {
+            background: var(--burgundy);
+            transform: translateY(-2px);
+        }
+
+        .search-btn:active {
             transform: translateY(0);
         }
 
@@ -424,6 +489,9 @@
                 gap: 1rem;
                 text-align: center;
             }
+            .search-box {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -441,8 +509,9 @@
     <!-- Main content -->
     <div class="container">
         <header>
-            <h1 class="title">skorpi<span> </span></h1>
+            <h1 class="title">skorpi<span> </span> </h1>
             <div class="kanji">影 桜</div>
+	    <img src="https://animated-gif.su/_ph/5/2/197099195.gif">
         </header>
 
         <div class="typing-container">
@@ -451,7 +520,18 @@
                 <button class="typing-btn" id="whoami-btn">whoami</button>
                 <button class="typing-btn" id="skills-btn">skills</button>
                 <button class="typing-btn" id="contact-btn">contact</button>
+                <a href="certificates.html" class="typing-btn">certificates</a>
             </div>
+        </div>
+
+        <!-- Добавленная поисковая строка -->
+        <div class="search-container">
+            <div class="search-title">Global Search</div>
+            <div class="search-box">
+                <input type="text" id="search-input" class="search-input" placeholder="Enter your search query...">
+                <button id="search-btn" class="search-btn">Search</button>
+            </div>
+            <div id="search-results" class="typing-text" style="margin-top: 1rem; min-height: 50px;"></div>
         </div>
 
         <h2 class="section-title">KAKASHKE</h2>
@@ -507,7 +587,7 @@
                 <a href="https://github.com/skorpiq" class="social-icon" target="_blank">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                 </a>
-                <a href="https://t.me/zxc" class="social-icon" target="_blank">
+                <a href="https://t.me/crowchillbird" class="social-icon" target="_blank">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/></svg>
                 </a>
                 <a href="#" id="email-btn" class="social-icon">
@@ -574,6 +654,33 @@
             contact: `# Contact Information\n\nEmail: skorpi@protonmail.com\nTelegram: @skorpi\nGitHub: github.com/skorpi\n\nClick the email icon below to copy my email address.`
         };
         
+        // Search functionality
+        function performSearch(query) {
+            const resultsContainer = document.getElementById('search-results');
+            
+            if (!query) {
+                resultsContainer.innerHTML = '<span class="prompt">Please enter a search query</span>';
+                return;
+            }
+            
+            // Simulating search with static results
+            resultsContainer.innerHTML = '<span class="prompt">Searching for:</span> ' + query;
+            
+            // Simulating search delay
+            setTimeout(() => {
+                const searchResults = [
+                    `1. <a href="#" class="blood-link">${query} in Exploit Database</a> - Relevant CVE found`,
+                    `2. <a href="#" class="blood-link">${query} Vulnerability Research</a> - Recent studies`,
+                    `3. <a href="#" class="blood-link">${query} Penetration Testing Guide</a> - Comprehensive tutorial`,
+                    `4. <a href="#" class="blood-link">${query} Red Team Techniques</a> - Advanced methodologies`,
+                    `5. <a href="https://www.google.com/search?q=${encodeURIComponent(query)}" target="_blank" class="blood-link">View all results on Google</a>`
+                ];
+                
+                resultsContainer.innerHTML = '<span class="prompt">Search results:</span>\n' + 
+                    searchResults.map(result => `<div>${result}</div>`).join('');
+            }, 1000);
+        }
+        
         document.addEventListener('DOMContentLoaded', function() {
             createPetals();
             
@@ -583,6 +690,8 @@
             const contactBtn = document.getElementById('contact-btn');
             const emailBtn = document.getElementById('email-btn');
             const copyNotification = document.getElementById('copy-notification');
+            const searchBtn = document.getElementById('search-btn');
+            const searchInput = document.getElementById('search-input');
             
             // Initial text
             typeWriter(typingText, content.whoami);
@@ -591,6 +700,17 @@
             whoamiBtn.addEventListener('click', () => typeWriter(typingText, content.whoami));
             skillsBtn.addEventListener('click', () => typeWriter(typingText, content.skills));
             contactBtn.addEventListener('click', () => typeWriter(typingText, content.contact));
+            
+            // Search functionality
+            searchBtn.addEventListener('click', () => {
+                performSearch(searchInput.value);
+            });
+            
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    performSearch(searchInput.value);
+                }
+            });
             
             // Blood drop effect on links
             document.querySelectorAll('.blood-link, .social-icon').forEach(link => {
