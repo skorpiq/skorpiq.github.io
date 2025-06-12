@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>skorpi | Certificates</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YKNJ4S4PJ5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YKNJ4S4PJ5');
+    </script>
+    <style>
+        /* Все стили копируются из главной страницы */
+        :root {
+            --burgundy: #800020;
+            --dark-burgundy: #500010;
+            --black: #0a0a0a;
+            --red: #ff0033;
+            --terminal-red: #ff0033;
+            --light-red: #ff3355;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: var(--black);
+            color: white;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Background layers */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            background: var(--black);
+            overflow: hidden;
+        }
+
+        .sakura-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path fill="%23800020" d="M100,20 C120,40 140,30 160,50 C180,70 170,90 150,110 C130,130 110,120 90,140 C70,160 50,150 30,130 C10,110 20,90 40,70 C60,50 80,60 100,20 Z" opacity="0.3"/></svg>');
+            background-size: cover;
+            opacity: 0.2;
+            filter: blur(4px);
+        }
+
+        .sakura-tree {
+            position: fixed;
+            bottom: 0;
+            right: -100px;
+            width: 600px;
+            height: 600px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"><path fill="%23330011" d="M250,500 C200,400 150,350 200,250 C150,200 200,150 250,100 C300,150 350,200 300,250 C350,300 300,350 250,500 Z" opacity="0.8"/></svg>');
+            background-repeat: no-repeat;
+            background-position: bottom right;
+            z-index: -2;
+            opacity: 0.15;
+        }
+
+        .petals-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .petal {
+            position: absolute;
+            background-color: var(--burgundy);
+            width: 12px;
+            height: 12px;
+            border-radius: 50% 0 50% 50%;
+            opacity: 0;
+            animation: falling linear infinite;
+        }
+
+        @keyframes falling {
+            0% {
+                transform: translateY(-10vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(110vh) translateX(50px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--burgundy);
+            padding-bottom: 1rem;
+        }
+
+        .title {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 2rem;
+            color: var(--burgundy);
+            text-shadow: 0 0 5px rgba(255, 0, 51, 0.3);
+        }
+
+        .title span {
+            color: white;
+        }
+
+        .kanji {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 1.5rem;
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            color: var(--burgundy);
+            margin-left: 1rem;
+        }
+
+        .typing-container {
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid var(--burgundy);
+            border-radius: 5px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 0 20px rgba(128, 0, 32, 0.3);
+            min-height: 200px;
+        }
+
+        .typing-text {
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        .typing-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            background-color: var(--terminal-red);
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .typing-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .typing-btn {
+            background: var(--dark-burgundy);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'JetBrains Mono', monospace;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .typing-btn:hover {
+            background: var(--burgundy);
+            transform: translateY(-2px);
+        }
+
+        .typing-btn:active {
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 1.5rem;
+            color: var(--burgundy);
+            margin: 2rem 0 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: var(--burgundy);
+            margin-left: 1rem;
+        }
+
+        .certificates {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .certificate-card {
+            background: rgba(20, 20, 20, 0.7);
+            border: 1px solid var(--burgundy);
+            border-radius: 5px;
+            padding: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(128, 0, 32, 0.4);
+        }
+
+        .certificate-title {
+            font-size: 1.2rem;
+            color: white;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .certificate-title::before {
+            content: "❯ ";
+            color: var(--terminal-red);
+        }
+
+        .certificate-issuer {
+            color: var(--light-red);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .certificate-date {
+            color: #aaa;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .certificate-link {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.3rem 0.6rem;
+            background: var(--dark-burgundy);
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+
+        .certificate-link:hover {
+            background: var(--burgundy);
+        }
+
+        .blood-link {
+            position: relative;
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .blood-link:hover {
+            color: var(--red);
+        }
+
+        .blood-link::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--red);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s;
+        }
+
+        .blood-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .blood-drop {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--red);
+            border-radius: 50% 50% 50% 0;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        footer {
+            background: rgba(10, 10, 10, 0.9);
+            border-top: 1px solid var(--burgundy);
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: black;
+            border: 2px solid var(--burgundy);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .social-icon:hover {
+            background: var(--burgundy);
+            transform: scale(1.1);
+        }
+
+        .social-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        .copy-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--black);
+            border: 1px solid var(--burgundy);
+            padding: 1rem;
+            border-radius: 5px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .copy-notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .copy-notification::before {
+            content: "忍";
+            font-family: 'Noto Sans JP', sans-serif;
+            margin-right: 0.5rem;
+            color: var(--red);
+        }
+
+        .mobile-pattern {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(var(--burgundy) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        @media (max-width: 768px) {
+            .petals-container {
+                display: none;
+            }
+            .sakura-tree {
+                display: none;
+            }
+            .mobile-pattern {
+                display: block;
+            }
+            .certificates {
+                grid-template-columns: 1fr;
+            }
+            .footer-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background layers -->
+    <div class="background">
+        <div class="sakura-bg"></div>
+        <div class="sakura-tree"></div>
+        <div class="mobile-pattern"></div>
+    </div>
+
+    <!-- Petals container -->
+    <div class="petals-container" id="petals-container"></div>
+
+    <!-- Main content -->
+    <div class="container">
+        <header>
+            <h1 class="title">skorpi<span> | Certificates</span></h1>
+            <div class="kanji">影 桜</div>
+        </header>
+
+        <div class="typing-container">
+            <div class="typing-text" id="typing-text"></div>
+            <div class="typing-buttons">
+                <a href="index.html" class="typing-btn">home</a>
+            </div>
+        </div>
+
+        <h2 class="section-title">Certificates</h2>
+        <div class="certificates">
+            <div class="certificate-card">
+                <h3 class="certificate-title">OSCP (Offensive Security Certified Professional)</h3>
+                <div class="certificate-issuer">Offensive Security</div>
+                <div class="certificate-date">Issued: May 2022</div>
+                <a href="#" class="certificate-link">View Certificate</a>
+            </div>
+            <div class="certificate-card">
+                <h3 class="certificate-title">CRT (Certified Red Team Operator)</h3>
+                <div class="certificate-issuer">Zero Point Security</div>
+                <div class="certificate-date">Issued: November 2021</div>
+                <a href="#" class="certificate-link">View Certificate</a>
+            </div>
+            <div class="certificate-card">
+                <h3 class="certificate-title">eCPPT (eLearnSecurity Certified Professional Penetration Tester)</h3>
+                <div class="certificate-issuer">eLearnSecurity</div>
+                <div class="certificate-date">Issued: March 2021</div>
+                <a href="#" class="certificate-link">View Certificate</a>
+            </div>
+            <div class="certificate-card">
+                <h3 class="certificate-title">SLAE (SecurityTube Linux Assembly Expert)</h3>
+                <div class="certificate-issuer">SecurityTube</div>
+                <div class="certificate-date">Issued: September 2020</div>
+                <a href="#" class="certificate-link">View Certificate</a>
+            </div>
+            <div class="certificate-card">
+                <h3 class="certificate-title">OSWP (Offensive Security Wireless Professional)</h3>
+                <div class="certificate-issuer">Offensive Security</div>
+                <div class="certificate-date">Issued: July 2020</div>
+                <a href="#" class="certificate-link">View Certificate</a>
+            </div>
+            <div class="certificate-card">
+                <h3 class="certificate-title">CCNA (Cisco Certified Network Associate)</h3>
+                <div class="certificate-issuer">Cisco</div>
+                <div class="certificate-date">Issued: January 2019</div>
+                <a href="#" class="certificate-link">View Certificate</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div>© 2025 skorpi | マキシムは愚か者だ</div>
+            <div class="social-links">
+                <a href="https://github.com/skorpiq" class="social-icon" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+                <a href="https://t.me/crowchillbird" class="social-icon" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/></svg>
+                </a>
+                <a href="#" id="email-btn" class="social-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12.713l-11.985-9.713h23.97l-11.985 9.713zm0 2.574l-12-9.725v15.438h24v-15.438l-12 9.725z"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="copy-notification" id="copy-notification">連絡ありがとう</div>
+
+    <script>
+        // Create sakura petals in the dedicated container
+        function createPetals() {
+            const container = document.getElementById('petals-container');
+            const petalCount = window.innerWidth < 768 ? 0 : 15;
+            
+            container.innerHTML = '';
+            
+            for (let i = 0; i < petalCount; i++) {
+                const petal = document.createElement('div');
+                petal.classList.add('petal');
+                
+                const size = Math.random() * 12 + 8;
+                const left = Math.random() * 100;
+                const delay = Math.random() * 10;
+                const duration = Math.random() * 15 + 10;
+                const opacity = Math.random() * 0.5 + 0.3;
+                
+                petal.style.width = `${size}px`;
+                petal.style.height = `${size}px`;
+                petal.style.left = `${left}vw`;
+                petal.style.animationDelay = `${delay}s`;
+                petal.style.animationDuration = `${duration}s`;
+                petal.style.opacity = opacity;
+                
+                const hue = Math.random() * 10 + 340;
+                petal.style.backgroundColor = `hsla(${hue}, 80%, 60%, ${opacity})`;
+                
+                container.appendChild(petal);
+            }
+        }
+
+        // Уведомление о копировании
+        document.addEventListener('DOMContentLoaded', function() {
+            createPetals();
+            
+            const emailBtn = document.getElementById('email-btn');
+            const copyNotification = document.getElementById('copy-notification');
+            
+            if (emailBtn) {
+                emailBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    navigator.clipboard.writeText('skorpi@protonmail.com').then(() => {
+                        copyNotification.classList.add('show');
+                        setTimeout(() => {
+                            copyNotification.classList.remove('show');
+                        }, 3000);
+                    }).catch(err => {
+                        console.error('Failed to copy text: ', err);
+                        copyNotification.textContent = "Copy failed";
+                        copyNotification.classList.add('show');
+                        setTimeout(() => {
+                            copyNotification.classList.remove('show');
+                            copyNotification.textContent = "連絡ありがとう";
+                        }, 3000);
+                    });
+                });
+            }
+            
+            window.addEventListener('resize', function() {
+                createPetals();
+            });
+        });
+    </script>
+</body>
+</html>
