@@ -22,11 +22,11 @@
             --light-red: #ff3355;
             
             /* Обновленные цвета для светлой темы */
-            --light-bg: #fff9fb; /* Очень светлый розовый фон */
-            --light-text: #4a4a4a; /* Мягкий темно-серый */
-            --light-burgundy: #ff8fa3; /* Нежный розовый */
-            --light-accent: #ffc2d1; /* Очень светлый розовый */
-            --light-sakura: #ffb6c1; /* Пастельный розовый */
+            --light-bg: #fff9fb;
+            --light-text: #4a4a4a;
+            --light-burgundy: #ff8fa3;
+            --light-accent: #ffc2d1;
+            --light-sakura: #ffb6c1;
         }
 
         * {
@@ -769,7 +769,6 @@
             background-image: radial-gradient(var(--light-sakura) 1px, transparent 1px);
         }
 
-        /* Кнопка переключения темы */
         .theme-toggle {
             position: fixed;
             top: 20px;
@@ -797,6 +796,35 @@
 
         .theme-toggle:hover {
             transform: scale(1.1);
+        }
+
+        .certificates-btn {
+            background: var(--dark-burgundy);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        body.light-theme .certificates-btn {
+            background: var(--light-burgundy);
+            color: white;
+        }
+
+        .certificates-btn:hover {
+            background: var(--burgundy);
+            transform: translateY(-2px);
+        }
+
+        body.light-theme .certificates-btn:hover {
+            background: #ff6b8b;
+        }
+
+        .certificates-btn:active {
+            transform: translateY(0);
         }
 
         @media (max-width: 768px) {
@@ -834,24 +862,21 @@
     </style>
 </head>
 <body>
-    <!-- Background layers -->
     <div class="background">
         <div class="sakura-bg"></div>
         <div class="sakura-tree"></div>
         <div class="mobile-pattern"></div>
     </div>
 
-    <!-- Petals container -->
     <div class="petals-container" id="petals-container"></div>
 
-    <!-- Theme toggle button -->
     <button id="theme-toggle" class="theme-toggle">月</button>
 
-    <!-- Main content -->
     <div class="container">
         <header>
             <h1 class="title">skorpi<span> </span></h1>
             <div class="kanji">影 桜</div>
+            <button class="certificates-btn" id="certificates-btn">Certificates</button>
         </header>
 
         <div class="search-container">
@@ -868,16 +893,6 @@
         </div>
 
         <div id="main-content">
-            <div class="typing-container">
-                <div class="typing-text" id="typing-text"></div>
-                <div class="typing-buttons">
-                    <button class="typing-btn" id="whoami-btn">whoami</button>
-                    <button class="typing-btn" id="skills-btn">skills</button>
-                    <button class="typing-btn" id="contact-btn">contact</button>
-                    <a href="certificates.html" class="typing-btn">certificates</a>
-                </div>
-            </div>
-
             <h2 class="section-title">KAKASHKE</h2>
             <div class="projects">
                 <div class="project-card">
@@ -931,7 +946,7 @@
                     <a href="https://github.com/skorpiq" class="social-icon" target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                     </a>
-                    <a href="https://t.me/durov" class="social-icon" target="_blank">
+                    <a href="https://t.me/crowchillbird" class="social-icon" target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/></svg>
                     </a>
                     <a href="#" id="email-btn" class="social-icon">
@@ -980,10 +995,8 @@
                 petal.style.opacity = opacity;
                 
                 if (isLightTheme) {
-                    // Нежно-розовые лепестки для светлой темы
                     petal.style.backgroundColor = `hsla(340, 100%, 85%, ${opacity})`;
                 } else {
-                    // Бордовые лепестки для темной темы
                     const hue = Math.random() * 10 + 340;
                     petal.style.backgroundColor = `hsla(${hue}, 80%, 60%, ${opacity})`;
                 }
@@ -991,23 +1004,6 @@
                 container.appendChild(petal);
             }
         }
-        
-        async function typeWriter(textElement, text, speed = 30) {
-            textElement.innerHTML = '';
-            for (let i = 0; i < text.length; i++) {
-                textElement.innerHTML += text.charAt(i);
-                await new Promise(resolve => setTimeout(resolve, speed));
-            }
-            const cursor = document.createElement('span');
-            cursor.classList.add('typing-cursor');
-            textElement.appendChild(cursor);
-        }
-        
-        const content = {
-            whoami: `# About skorpi\n\nRed Team Operator | Penetration Tester | Security Researcher\n\nSpecializing in offensive security, vulnerability research, and custom tool development.\nBlending technical expertise with creative problem-solving to identify and exploit vulnerabilities.`,
-            skills: `# Core Skills\n\n❯ Penetration Testing\n❯ Exploit Development\n❯ Custom Tool Development\n❯ Network Security\n❯ Reverse Engineering\n❯ Social Engineering\n❯ Threat Emulation\n❯ Vulnerability Research`,
-            contact: `# Contact Information\n\nEmail: skorpi@protonmail.com\nTelegram: @skorpi\nGitHub: github.com/skorpi\n\nClick the email icon below to copy my email address.`
-        };
         
         function performSearch(query) {
             const cleanQuery = escapeHtml(query.trim());
@@ -1091,10 +1087,7 @@
                 document.getElementById('theme-toggle').textContent = '影';
             }
             
-            const typingText = document.getElementById('typing-text');
-            const whoamiBtn = document.getElementById('whoami-btn');
-            const skillsBtn = document.getElementById('skills-btn');
-            const contactBtn = document.getElementById('contact-btn');
+            const certificatesBtn = document.getElementById('certificates-btn');
             const emailBtn = document.getElementById('email-btn');
             const copyNotification = document.getElementById('copy-notification');
             const searchBtn = document.getElementById('search-btn');
@@ -1102,11 +1095,9 @@
             const backBtn = document.getElementById('back-btn');
             const themeToggle = document.getElementById('theme-toggle');
             
-            typeWriter(typingText, content.whoami);
-            
-            whoamiBtn.addEventListener('click', () => typeWriter(typingText, content.whoami));
-            skillsBtn.addEventListener('click', () => typeWriter(typingText, content.skills));
-            contactBtn.addEventListener('click', () => typeWriter(typingText, content.contact));
+            certificatesBtn.addEventListener('click', () => {
+                window.location.href = 'certificates.html';
+            });
             
             searchBtn.addEventListener('click', () => performSearch(searchInput.value));
             searchInput.addEventListener('keypress', (e) => {
