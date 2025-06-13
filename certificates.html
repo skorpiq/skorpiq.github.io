@@ -157,9 +157,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 3rem;
+            margin-bottom: 1rem;
             border-bottom: 1px solid var(--burgundy);
-            padding-bottom: 1rem;
+            padding-bottom: 0.5rem;
             transition: border-color 0.5s;
         }
 
@@ -207,10 +207,10 @@
             background: rgba(10, 10, 10, 0.8);
             border: 1px solid var(--burgundy);
             border-radius: 5px;
-            padding: 2rem;
-            margin-bottom: 3rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
             box-shadow: 0 0 20px rgba(128, 0, 32, 0.3);
-            min-height: 200px;
+            min-height: auto;
             transition: all 0.5s;
         }
 
@@ -254,7 +254,7 @@
         .typing-buttons {
             display: flex;
             gap: 1rem;
-            margin-top: 1rem;
+            margin-top: 0.5rem;
             flex-wrap: wrap;
         }
 
@@ -326,7 +326,7 @@
             font-family: 'Noto Sans JP', sans-serif;
             font-size: 1.5rem;
             color: var(--burgundy);
-            margin: 2rem 0 1rem;
+            margin: 1rem 0;
             display: flex;
             align-items: center;
             transition: color 0.5s;
@@ -689,14 +689,14 @@
     <div class="container">
         <header>
             <h1 class="title">skorpi<span> | Certificates</span></h1>
-            <div class="kanji">影 桜</div>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <a href="index.html" class="typing-btn">home</a>
+                <div class="kanji">影 桜</div>
+            </div>
         </header>
 
-        <div class="typing-container">
+        <div class="typing-container" style="margin-bottom: 1rem; min-height: auto;">
             <div class="typing-text" id="typing-text"></div>
-            <div class="typing-buttons">
-                <a href="index.html" class="typing-btn">home</a>
-            </div>
         </div>
 
         <h2 class="section-title">Certificates</h2>
