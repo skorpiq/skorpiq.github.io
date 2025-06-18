@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>skorpi</title>
+    <link rel="icon" href="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" type="image/gif">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YKNJ4S4PJ5"></script>
     <script>
@@ -21,7 +22,7 @@
             --terminal-red: #ff0033;
             --light-red: #ff3355;
             
-            /* Обновленные цвета для светлой темы */
+            /* Light theme variables */
             --light-bg: #fff9fb;
             --light-text: #4a4a4a;
             --light-burgundy: #ff8fa3;
@@ -50,6 +51,7 @@
             color: var(--light-text);
         }
 
+        /* Background layers */
         .background {
             position: fixed;
             top: 0;
@@ -156,9 +158,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 3rem;
+            margin-bottom: 0.5rem;
             border-bottom: 1px solid var(--burgundy);
-            padding-bottom: 1rem;
+            padding-bottom: 0.5rem;
             transition: border-color 0.5s;
         }
 
@@ -202,96 +204,12 @@
             color: var(--light-burgundy);
         }
 
-        .typing-container {
-            background: rgba(10, 10, 10, 0.8);
-            border: 1px solid var(--burgundy);
-            border-radius: 5px;
-            padding: 2rem;
-            margin-bottom: 3rem;
-            box-shadow: 0 0 20px rgba(128, 0, 32, 0.3);
-            min-height: 200px;
-            transition: all 0.5s;
-        }
-
-        body.light-theme .typing-container {
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid var(--light-burgundy);
-            box-shadow: 0 0 20px rgba(255, 143, 163, 0.2);
-        }
-
-        .typing-text {
-            font-family: 'JetBrains Mono', monospace;
-            line-height: 1.6;
-            white-space: pre-wrap;
-            transition: color 0.5s;
-        }
-
-        body.light-theme .typing-text {
-            color: var(--light-text);
-        }
-
-        .typing-cursor {
-            display: inline-block;
-            width: 8px;
-            height: 16px;
-            background-color: var(--terminal-red);
-            animation: blink 1s infinite;
-            vertical-align: middle;
-            transition: background-color 0.5s;
-        }
-
-        body.light-theme .typing-cursor {
-            background-color: var(--light-burgundy);
-        }
-
-        @keyframes blink {
-            50% {
-                opacity: 0;
-            }
-        }
-
-        .typing-buttons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .typing-btn {
-            background: var(--dark-burgundy);
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 3px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        body.light-theme .typing-btn {
-            background: var(--light-burgundy);
-            color: white;
-        }
-
-        .typing-btn:hover {
-            background: var(--burgundy);
-            transform: translateY(-2px);
-        }
-
-        body.light-theme .typing-btn:hover {
-            background: #ff6b8b;
-        }
-
-        .typing-btn:active {
-            transform: translateY(0);
-        }
-
         .search-container {
             background: rgba(10, 10, 10, 0.9);
             border: 1px solid var(--burgundy);
             border-radius: 5px;
-            padding: 1.5rem;
-            margin-bottom: 3rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
             box-shadow: 0 0 15px rgba(128, 0, 32, 0.4);
             transition: all 0.5s;
         }
@@ -308,7 +226,7 @@
             color: var(--burgundy);
             display: flex;
             align-items: center;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             transition: color 0.5s;
         }
 
@@ -330,7 +248,7 @@
         .search-box {
             display: flex;
             gap: 0.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
         }
 
         .search-input {
@@ -396,8 +314,8 @@
             background: rgba(20, 20, 20, 0.7);
             border: 1px solid var(--burgundy);
             border-radius: 5px;
-            padding: 1.5rem;
-            margin-top: 1rem;
+            padding: 1rem;
+            margin-top: 0.5rem;
             min-height: 100px;
             transition: all 0.5s;
         }
@@ -450,7 +368,7 @@
             padding: 0.5rem 1rem;
             border-radius: 3px;
             cursor: pointer;
-            margin-top: 1rem;
+            margin-top: 0.5rem;
             font-family: 'JetBrains Mono', monospace;
             transition: all 0.3s;
         }
@@ -476,7 +394,7 @@
             font-family: 'Noto Sans JP', sans-serif;
             font-size: 1.5rem;
             color: var(--burgundy);
-            margin: 2rem 0 1rem;
+            margin: 0.5rem 0 1rem;
             display: flex;
             align-items: center;
             transition: color 0.5s;
@@ -503,7 +421,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1.5rem;
-            margin-bottom: 3rem;
+            margin-bottom: 1.5rem;
         }
 
         .project-card {
@@ -583,6 +501,49 @@
             color: white;
         }
 
+        .skills {
+            margin-bottom: 1.5rem;
+        }
+
+        .skills ul {
+            list-style-type: none;
+            columns: 2;
+            margin-bottom: 1rem;
+        }
+
+        .skills li {
+            margin-bottom: 0.5rem;
+        }
+
+        .certificates-btn {
+            background: var(--dark-burgundy);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        body.light-theme .certificates-btn {
+            background: var(--light-burgundy);
+            color: white;
+        }
+
+        .certificates-btn:hover {
+            background: var(--burgundy);
+            transform: translateY(-2px);
+        }
+
+        body.light-theme .certificates-btn:hover {
+            background: #ff6b8b;
+        }
+
+        .certificates-btn:active {
+            transform: translateY(0);
+        }
+
         .blood-link {
             position: relative;
             color: white;
@@ -643,8 +604,7 @@
         footer {
             background: rgba(10, 10, 10, 0.9);
             border-top: 1px solid var(--burgundy);
-            padding: 2rem 0;
-            margin-top: 3rem;
+            padding: 1.5rem 0;
             transition: all 0.5s;
         }
 
@@ -798,35 +758,6 @@
             transform: scale(1.1);
         }
 
-        .certificates-btn {
-            background: var(--dark-burgundy);
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 3px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        body.light-theme .certificates-btn {
-            background: var(--light-burgundy);
-            color: white;
-        }
-
-        .certificates-btn:hover {
-            background: var(--burgundy);
-            transform: translateY(-2px);
-        }
-
-        body.light-theme .certificates-btn:hover {
-            background: #ff6b8b;
-        }
-
-        .certificates-btn:active {
-            transform: translateY(0);
-        }
-
         @media (max-width: 768px) {
             .petals-container {
                 display: none;
@@ -848,8 +779,8 @@
             .search-box {
                 flex-direction: column;
             }
-            .typing-buttons {
-                flex-direction: column;
+            .skills ul {
+                columns: 1;
             }
             .theme-toggle {
                 top: 10px;
@@ -875,9 +806,10 @@
     <div class="container">
         <header>
             <h1 class="title">skorpi<span> </span></h1>
-           <div style="display: flex; align-items: center; gap: 1rem;">
-                <a href="certificates.html" class="typing-btn">certificates</a>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <button class="certificates-btn" id="certificates-btn">Certificates</button>
                 <div class="kanji">影 桜</div>
+            </div>
         </header>
 
         <div class="search-container">
@@ -927,7 +859,7 @@
 
             <h2 class="section-title">Skills</h2>
             <div class="skills">
-                <ul style="list-style-type: none; columns: 2;">
+                <ul>
                     <li>❯ Penetration Testing</li>
                     <li>❯ Exploit Development</li>
                     <li>❯ Custom Tool Development</li>
